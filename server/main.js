@@ -6,17 +6,10 @@ import {StaticRouter} from 'react-router-dom/server';
 import {App} from "../imports/ui/App";
 
 Meteor.methods({
-    "hello1"() {
+    "hello"(message) {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve("Hello World from Server 1")
-            }, 1000)
-        })
-    },
-    "hello2"(arg) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve("Hello World from Server 2 after " + arg)
+                resolve(message)
             }, 1000)
         })
     }

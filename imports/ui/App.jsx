@@ -31,14 +31,26 @@ const useServerState = (defaultValue, method, args) => {
     return [state, setState]
 }
 
-export const App = () => {
-    let [message1, setMessage1] = useServerState("Hello World from Client 1", "hello1", "params 1");
-    let [message2, setMessage2] = useServerState("Hello World from Client 2", "hello2", message1);
+const Child = ({message}) => {
+
+    const [message2, _] = useServerState("ChildClient", "hello", message + " - ChildServer");
+    console.log(message2)
 
     return (
         <div>
-            <p>{message1}</p>
             <p>{message2}</p>
+        </div>
+    )
+}
+
+export const App = () => {
+    const [message, _] = useServerState("ParentClient", "hello", "ParentServer");
+    console.log(message)
+
+    return (
+        <div>
+            <p>{message}</p>
+            <Child message={message}/>
         </div>
     );
 }
